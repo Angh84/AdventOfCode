@@ -2,11 +2,11 @@
 using Microsoft.Extensions.Configuration;
 
 var builder = new ConfigurationBuilder()
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("config.json", false);
+    .AddUserSecrets<Program>();
 IConfiguration config = builder.Build();
 
-var inputLocation = config.GetSection("Settings")["InputLocation"];
+
+var inputLocation = config.GetSection("Settings")["inputPath"];
 var day = new Day01(inputLocation);
 Console.WriteLine(day.SolutionOne());
 Console.WriteLine(day.SolutionTwo());
