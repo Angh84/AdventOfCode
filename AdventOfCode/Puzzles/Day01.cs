@@ -7,9 +7,9 @@ namespace AdventOfCode.Puzzles
         private readonly List<string> input;
         public Day01(string path)
         {
-            var fileName = this.GetType().Name + ".txt";
+            var fileName = GetType().Name + ".txt";
             var inputFile = Path.Combine(path, fileName);
-            input = InputParser.getInput(inputFile);
+            input = InputParser.GetInput(inputFile);
         }
 
         public string SolutionOne()
