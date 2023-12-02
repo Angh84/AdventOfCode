@@ -1,4 +1,5 @@
-﻿using AdventOfCode.Puzzles;
+﻿using AdventOfCode;
+using AdventOfCode.Puzzles;
 using Microsoft.Extensions.Configuration;
 
 var builder = new ConfigurationBuilder()
@@ -7,6 +8,6 @@ IConfiguration config = builder.Build();
 
 
 var inputLocation = config.GetSection("Settings")["inputPath"];
-var day = new Day01(inputLocation);
+IDay day = new Day02(inputLocation);
 Console.WriteLine(day.SolutionOne());
 Console.WriteLine(day.SolutionTwo());
