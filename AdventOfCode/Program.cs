@@ -1,13 +1,19 @@
-﻿using AdventOfCode;
-using AdventOfCode.Puzzles;
+﻿using System.Diagnostics;
+using AdventOfCode.Lib;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = new ConfigurationBuilder()
     .AddUserSecrets<Program>();
-IConfiguration config = builder.Build();
 
+var config = builder.Build();
+var serviceProvider = new ServiceCollection()
+    .AddSingleton<IConfiguration>(config)
+    .AddHttpClient()
+    .AddScoped<ISolutionRunner, SolutionRunner>()
+    .BuildServiceProvider();
+var ih = serviceProvider.GetService<ISolutionRunner>();
+Debug.Assert(ih != null, nameof(ih) + " != null");
 
-var inputLocation = config.GetSection("Settings")["inputPath"];
-IDay day = new Day02(inputLocation);
-Console.WriteLine(day.SolutionOne());
-Console.WriteLine(day.SolutionTwo());
+await ih.RunSolution(3);
+
