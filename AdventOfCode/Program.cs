@@ -14,6 +14,6 @@ var serviceProvider = new ServiceCollection()
     .BuildServiceProvider();
 var ih = serviceProvider.GetService<ISolutionRunner>();
 Debug.Assert(ih != null, nameof(ih) + " != null");
-
-await ih.RunSolution(3);
+var dayOfDecember = DateTime.Now.Day;
+await ih.RunSolution(dayOfDecember);
 
